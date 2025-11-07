@@ -24,10 +24,31 @@ const Index = () => {
   ];
 
   const galleryImages = [
-    'https://cdn.poehali.dev/projects/f05b8789-770f-4b4c-9c1b-1234d1ef233c/files/ec6d2f45-a257-4ac8-9684-45eafef4eea7.jpg',
-    'https://cdn.poehali.dev/projects/f05b8789-770f-4b4c-9c1b-1234d1ef233c/files/c8edc414-b9f6-47be-a448-5c21b39d712f.jpg',
-    'https://cdn.poehali.dev/projects/f05b8789-770f-4b4c-9c1b-1234d1ef233c/files/ba24eb17-9605-4b89-935a-f76793ba2415.jpg',
-    'https://cdn.poehali.dev/projects/f05b8789-770f-4b4c-9c1b-1234d1ef233c/files/ec6d2f45-a257-4ac8-9684-45eafef4eea7.jpg',
+    { 
+      url: 'https://cdn.poehali.dev/projects/f05b8789-770f-4b4c-9c1b-1234d1ef233c/files/ec6d2f45-a257-4ac8-9684-45eafef4eea7.jpg',
+      title: 'Флагманский линкор "Титан"',
+      description: 'Наш главный боевой корабль класса "Дредноут" с 40 турелями и ядерным реактором. Участвовал в обороне станции "Альфа" против пиратской коалиции.'
+    },
+    { 
+      url: 'https://cdn.poehali.dev/projects/f05b8789-770f-4b4c-9c1b-1234d1ef233c/files/c8edc414-b9f6-47be-a448-5c21b39d712f.jpg',
+      title: 'Командный центр фракции',
+      description: 'Главная космическая станция Sofa Space Forces с торговым районом, доками для кораблей и жилыми модулями на 100+ игроков. Оснащена мощной защитой.'
+    },
+    { 
+      url: 'https://cdn.poehali.dev/projects/f05b8789-770f-4b4c-9c1b-1234d1ef233c/files/ba24eb17-9605-4b89-935a-f76793ba2415.jpg',
+      title: 'Битва за сектор Омега',
+      description: 'Эпическое сражение между альянсом SSF и пиратами за контроль над ресурсным астероидом. В бою участвовало 15 кораблей с каждой стороны.'
+    },
+    { 
+      url: 'https://cdn.poehali.dev/projects/f05b8789-770f-4b4c-9c1b-1234d1ef233c/files/ec6d2f45-a257-4ac8-9684-45eafef4eea7.jpg',
+      title: 'Истребительная эскадрилья',
+      description: 'Легкие истребители "Соколы" на патрулировании границ территории фракции. Быстрые, маневренные и смертоносные в массовых атаках.'
+    },
+    { 
+      url: 'https://cdn.poehali.dev/projects/f05b8789-770f-4b4c-9c1b-1234d1ef233c/files/c8edc414-b9f6-47be-a448-5c21b39d712f.jpg',
+      title: 'Планетарная база на Марсе',
+      description: 'Подземная база на красной планете с автоматизированными шахтами и производственными линиями. Защищена турелями и силовым полем.'
+    },
   ];
 
   const scrollToSection = (sectionId: string) => {
@@ -101,7 +122,7 @@ const Index = () => {
             <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-2xl mx-auto">
               Присоединяйся к элитному космическому флоту в Space Engineers. Исследуй галактику, строй корабли, сражайся за территорию!
             </p>
-            <div className="flex flex-wrap gap-4 justify-center">
+            <div className="flex flex-wrap gap-4 justify-center mb-16">
               <Button size="lg" className="bg-primary text-primary-foreground border-glow hover:scale-105 transition-transform">
                 <Icon name="Play" size={20} className="mr-2" />
                 Начать играть
@@ -110,6 +131,48 @@ const Index = () => {
                 <Icon name="Info" size={20} className="mr-2" />
                 Узнать больше
               </Button>
+            </div>
+
+            <div className="max-w-4xl mx-auto">
+              <h3 className="text-2xl font-bold text-center mb-6 text-primary">Поддержи наш проект голосованием!</h3>
+              <div className="grid md:grid-cols-2 gap-6">
+                <Card className="glass-card p-6 border-primary/30 hover:border-primary transition-all group cursor-pointer">
+                  <div className="flex items-center space-x-4">
+                    <div className="w-16 h-16 bg-primary/20 border-2 border-primary rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <Icon name="Star" className="text-primary" size={32} />
+                    </div>
+                    <div>
+                      <h4 className="text-xl font-bold mb-1">WARG Monitoring</h4>
+                      <p className="text-sm text-muted-foreground mb-2">Голосуй каждые 12 часов</p>
+                      <Badge className="bg-green-500/20 text-green-400 border-green-500/50">Активно</Badge>
+                    </div>
+                  </div>
+                  <Button className="w-full mt-4 bg-primary/20 border border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+                    <Icon name="ThumbsUp" size={16} className="mr-2" />
+                    Проголосовать на WARG
+                  </Button>
+                </Card>
+
+                <Card className="glass-card p-6 border-secondary/30 hover:border-secondary transition-all group cursor-pointer">
+                  <div className="flex items-center space-x-4">
+                    <div className="w-16 h-16 bg-secondary/20 border-2 border-secondary rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <Icon name="Award" className="text-secondary" size={32} />
+                    </div>
+                    <div>
+                      <h4 className="text-xl font-bold mb-1">GameMonitor</h4>
+                      <p className="text-sm text-muted-foreground mb-2">Голосуй каждые 24 часа</p>
+                      <Badge className="bg-green-500/20 text-green-400 border-green-500/50">Активно</Badge>
+                    </div>
+                  </div>
+                  <Button className="w-full mt-4 bg-secondary/20 border border-secondary text-secondary hover:bg-secondary hover:text-white">
+                    <Icon name="ThumbsUp" size={16} className="mr-2" />
+                    Проголосовать на GameMonitor
+                  </Button>
+                </Card>
+              </div>
+              <p className="text-center text-sm text-muted-foreground mt-4">
+                Твой голос помогает нам стать заметнее и привлечь больше игроков!
+              </p>
             </div>
           </div>
         </section>
@@ -205,20 +268,22 @@ const Index = () => {
         </section>
 
         <section id="gallery" className="min-h-screen flex items-center justify-center px-6 py-20">
-          <div className="container mx-auto max-w-6xl">
+          <div className="container mx-auto max-w-7xl">
             <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 text-glow">Галерея</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {galleryImages.map((img, index) => (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {galleryImages.map((item, index) => (
                 <Card key={index} className="glass-card border-accent/30 overflow-hidden group cursor-pointer hover:border-accent transition-all">
                   <div className="relative aspect-video overflow-hidden">
                     <img 
-                      src={img} 
-                      alt={`Gallery ${index + 1}`} 
+                      src={item.url} 
+                      alt={item.title} 
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-                      <p className="text-sm font-semibold">Скриншот #{index + 1}</p>
-                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent" />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold mb-2 text-primary">{item.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
                   </div>
                 </Card>
               ))}

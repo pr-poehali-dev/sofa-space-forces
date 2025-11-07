@@ -1,35 +1,26 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import Icon from '@/components/ui/icon';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState('home');
+  const navigate = useNavigate();
 
   const navItems = [
     { id: 'home', label: 'Главная', icon: 'Home' },
     { id: 'monitoring', label: 'Мониторинг', icon: 'Activity' },
     { id: 'about', label: 'О проекте', icon: 'Info' },
-    { id: 'rules', label: 'Правила', icon: 'BookOpen' },
-    { id: 'team', label: 'Команда', icon: 'Users' },
     { id: 'gallery', label: 'Галерея', icon: 'Image' },
     { id: 'contacts', label: 'Контакты', icon: 'Mail' },
   ];
 
-  const teamMembers = [
-    { name: 'Капитан Соколов', role: 'Командир флота', status: 'online' },
-    { name: 'Инженер Иванова', role: 'Главный инженер', status: 'online' },
-    { name: 'Навигатор Петров', role: 'Штурман', status: 'offline' },
-    { name: 'Пилот Сидоров', role: 'Ас-пилот', status: 'online' },
-  ];
-
-  const rules = [
-    { title: 'Уважение', description: 'Относитесь с уважением ко всем членам команды' },
-    { title: 'Командная игра', description: 'Работайте вместе для достижения общих целей' },
-    { title: 'Честность', description: 'Играйте честно, без читов и эксплойтов' },
-    { title: 'Коммуникация', description: 'Используйте голосовую связь для координации' },
+  const servers = [
+    { name: 'Server #1 - PvP Arena', players: '24/50', tps: 60, uptime: '99.9%', status: 'online', ip: '192.168.1.1:27015' },
+    { name: 'Server #2 - Creative Build', players: '18/40', tps: 60, uptime: '99.7%', status: 'online', ip: '192.168.1.2:27015' },
+    { name: 'Server #3 - Survival', players: '35/60', tps: 58, uptime: '98.5%', status: 'online', ip: '192.168.1.3:27015' },
   ];
 
   const galleryImages = [
@@ -46,8 +37,14 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background via-background to-muted relative overflow-hidden">
-      <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/20 via-transparent to-transparent pointer-events-none" />
+    <div className="min-h-screen relative overflow-hidden">
+      <div 
+        className="fixed inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ 
+          backgroundImage: 'url(https://cdn.poehali.dev/projects/f05b8789-770f-4b4c-9c1b-1234d1ef233c/files/f87b9704-a767-4a55-8abf-db927e133209.jpg)',
+        }}
+      />
+      <div className="fixed inset-0 bg-background/70 backdrop-blur-sm" />
       
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute top-20 left-10 w-2 h-2 bg-primary rounded-full animate-pulse-glow" />
@@ -77,6 +74,14 @@ const Index = () => {
                   {item.label}
                 </Button>
               ))}
+              <Button
+                variant="ghost"
+                onClick={() => navigate('/rules')}
+                className="text-muted-foreground hover:text-primary"
+              >
+                <Icon name="BookOpen" size={16} className="mr-2" />
+                Правила
+              </Button>
             </div>
           </div>
         </div>
@@ -110,38 +115,48 @@ const Index = () => {
         </section>
 
         <section id="monitoring" className="min-h-screen flex items-center justify-center px-6 py-20">
-          <div className="container mx-auto">
-            <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 text-glow">Мониторинг сервера</h2>
-            <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-              <Card className="glass-card p-6 border-primary/30 hover:border-primary/60 transition-all">
-                <div className="flex items-center justify-between mb-4">
-                  <Icon name="Server" className="text-primary" size={32} />
-                  <Badge className="bg-green-500/20 text-green-400 border-green-500/50">Online</Badge>
-                </div>
-                <h3 className="text-xl font-semibold mb-2">Статус сервера</h3>
-                <p className="text-3xl font-bold text-primary">99.9%</p>
-                <p className="text-sm text-muted-foreground mt-2">Uptime</p>
-              </Card>
-
-              <Card className="glass-card p-6 border-secondary/30 hover:border-secondary/60 transition-all">
-                <div className="flex items-center justify-between mb-4">
-                  <Icon name="Users" className="text-secondary" size={32} />
-                  <Badge className="bg-secondary/20 text-secondary border-secondary/50">Live</Badge>
-                </div>
-                <h3 className="text-xl font-semibold mb-2">Игроки онлайн</h3>
-                <p className="text-3xl font-bold text-secondary">24/50</p>
-                <p className="text-sm text-muted-foreground mt-2">Активных пилотов</p>
-              </Card>
-
-              <Card className="glass-card p-6 border-accent/30 hover:border-accent/60 transition-all">
-                <div className="flex items-center justify-between mb-4">
-                  <Icon name="Zap" className="text-accent" size={32} />
-                  <Badge className="bg-accent/20 text-accent border-accent/50">Active</Badge>
-                </div>
-                <h3 className="text-xl font-semibold mb-2">TPS</h3>
-                <p className="text-3xl font-bold text-accent">60</p>
-                <p className="text-sm text-muted-foreground mt-2">Тиков в секунду</p>
-              </Card>
+          <div className="container mx-auto max-w-7xl">
+            <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 text-glow">Мониторинг серверов</h2>
+            <div className="space-y-6">
+              {servers.map((server, idx) => (
+                <Card key={idx} className="glass-card p-6 border-primary/30 hover:border-primary/60 transition-all">
+                  <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                    <div className="flex items-center space-x-4">
+                      <div className="w-16 h-16 bg-primary/20 border border-primary rounded-lg flex items-center justify-center">
+                        <Icon name="Server" className="text-primary" size={32} />
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-bold mb-1">{server.name}</h3>
+                        <p className="text-sm text-muted-foreground font-mono">{server.ip}</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex flex-wrap gap-4">
+                      <div className="text-center">
+                        <Badge className={server.status === 'online' ? 'bg-green-500/20 text-green-400 border-green-500/50 mb-2' : 'bg-red-500/20 text-red-400 border-red-500/50 mb-2'}>
+                          {server.status === 'online' ? 'Online' : 'Offline'}
+                        </Badge>
+                        <p className="text-xs text-muted-foreground">Статус</p>
+                      </div>
+                      
+                      <div className="text-center px-4 border-l border-primary/20">
+                        <p className="text-2xl font-bold text-secondary">{server.players}</p>
+                        <p className="text-xs text-muted-foreground">Игроки</p>
+                      </div>
+                      
+                      <div className="text-center px-4 border-l border-primary/20">
+                        <p className="text-2xl font-bold text-accent">{server.tps}</p>
+                        <p className="text-xs text-muted-foreground">TPS</p>
+                      </div>
+                      
+                      <div className="text-center px-4 border-l border-primary/20">
+                        <p className="text-2xl font-bold text-primary">{server.uptime}</p>
+                        <p className="text-xs text-muted-foreground">Uptime</p>
+                      </div>
+                    </div>
+                  </div>
+                </Card>
+              ))}
             </div>
           </div>
         </section>
@@ -189,63 +204,25 @@ const Index = () => {
           </div>
         </section>
 
-        <section id="rules" className="min-h-screen flex items-center justify-center px-6 py-20">
-          <div className="container mx-auto max-w-4xl">
-            <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 text-glow">Правила сервера</h2>
-            <div className="grid md:grid-cols-2 gap-6">
-              {rules.map((rule, index) => (
-                <Card key={index} className="glass-card p-6 border-primary/30 hover:border-primary/60 transition-all">
-                  <div className="flex items-start space-x-4">
-                    <div className="w-12 h-12 rounded-lg bg-primary/20 border border-primary flex items-center justify-center flex-shrink-0">
-                      <span className="text-2xl font-bold text-primary">{index + 1}</span>
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-semibold mb-2">{rule.title}</h3>
-                      <p className="text-muted-foreground">{rule.description}</p>
-                    </div>
-                  </div>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="team" className="min-h-screen flex items-center justify-center px-6 py-20">
-          <div className="container mx-auto max-w-5xl">
-            <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 text-glow">Наша команда</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {teamMembers.map((member, index) => (
-                <Card key={index} className="glass-card p-6 border-secondary/30 hover:border-secondary/60 transition-all text-center">
-                  <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center border-2 border-primary">
-                    <Icon name="User" className="text-white" size={40} />
-                  </div>
-                  <h3 className="text-lg font-semibold mb-1">{member.name}</h3>
-                  <p className="text-sm text-muted-foreground mb-3">{member.role}</p>
-                  <Badge className={member.status === 'online' ? 'bg-green-500/20 text-green-400 border-green-500/50' : 'bg-gray-500/20 text-gray-400 border-gray-500/50'}>
-                    {member.status === 'online' ? 'В сети' : 'Оффлайн'}
-                  </Badge>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-
         <section id="gallery" className="min-h-screen flex items-center justify-center px-6 py-20">
-          <div className="container mx-auto max-w-5xl">
+          <div className="container mx-auto max-w-6xl">
             <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 text-glow">Галерея</h2>
-            <Carousel className="w-full max-w-4xl mx-auto">
-              <CarouselContent>
-                {galleryImages.map((img, index) => (
-                  <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                    <Card className="glass-card border-accent/30 overflow-hidden">
-                      <img src={img} alt={`Gallery ${index + 1}`} className="w-full h-64 object-cover" />
-                    </Card>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <CarouselPrevious className="border-primary text-primary" />
-              <CarouselNext className="border-primary text-primary" />
-            </Carousel>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {galleryImages.map((img, index) => (
+                <Card key={index} className="glass-card border-accent/30 overflow-hidden group cursor-pointer hover:border-accent transition-all">
+                  <div className="relative aspect-video overflow-hidden">
+                    <img 
+                      src={img} 
+                      alt={`Gallery ${index + 1}`} 
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                      <p className="text-sm font-semibold">Скриншот #{index + 1}</p>
+                    </div>
+                  </div>
+                </Card>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -258,7 +235,7 @@ const Index = () => {
                 <p className="text-muted-foreground">Выбери удобный способ связи</p>
               </div>
               
-              <div className="grid md:grid-cols-2 gap-6 mb-8">
+              <div className="grid md:grid-cols-3 gap-6 mb-8">
                 <Button size="lg" className="bg-[#0088cc] hover:bg-[#0088cc]/90 text-white border-[#0088cc] h-16">
                   <Icon name="Send" size={24} className="mr-3" />
                   <div className="text-left">
@@ -274,43 +251,43 @@ const Index = () => {
                     <div className="font-semibold">Группа ВКонтакте</div>
                   </div>
                 </Button>
+
+                <Button size="lg" className="bg-[#5865F2] hover:bg-[#5865F2]/90 text-white border-[#5865F2] h-16">
+                  <Icon name="MessageSquare" size={24} className="mr-3" />
+                  <div className="text-left">
+                    <div className="text-xs opacity-80">Discord</div>
+                    <div className="font-semibold">Discord сервер</div>
+                  </div>
+                </Button>
               </div>
 
               <div className="border-t border-primary/20 pt-8">
-                <h4 className="text-xl font-semibold mb-4 text-center">Рекламные материалы</h4>
-                <Carousel className="w-full max-w-2xl mx-auto">
-                  <CarouselContent>
-                    <CarouselItem>
-                      <Card className="glass-card p-6 border-secondary/30">
-                        <div className="text-center">
-                          <Icon name="Megaphone" className="text-secondary mx-auto mb-4" size={48} />
-                          <h5 className="text-lg font-semibold mb-2">Набор новобранцев!</h5>
-                          <p className="text-muted-foreground">Присоединяйся к нашему флоту. Бонусы для новичков!</p>
-                        </div>
-                      </Card>
-                    </CarouselItem>
-                    <CarouselItem>
-                      <Card className="glass-card p-6 border-accent/30">
-                        <div className="text-center">
-                          <Icon name="Trophy" className="text-accent mx-auto mb-4" size={48} />
-                          <h5 className="text-lg font-semibold mb-2">Турнир флотов</h5>
-                          <p className="text-muted-foreground">Еженедельные PvP турниры с призами!</p>
-                        </div>
-                      </Card>
-                    </CarouselItem>
-                    <CarouselItem>
-                      <Card className="glass-card p-6 border-primary/30">
-                        <div className="text-center">
-                          <Icon name="Sparkles" className="text-primary mx-auto mb-4" size={48} />
-                          <h5 className="text-lg font-semibold mb-2">Новые моды</h5>
-                          <p className="text-muted-foreground">Уникальные корабли и оружие уже доступны!</p>
-                        </div>
-                      </Card>
-                    </CarouselItem>
-                  </CarouselContent>
-                  <CarouselPrevious className="border-primary text-primary" />
-                  <CarouselNext className="border-primary text-primary" />
-                </Carousel>
+                <h4 className="text-xl font-semibold mb-6 text-center">Актуальные события</h4>
+                <div className="grid md:grid-cols-3 gap-4">
+                  <Card className="glass-card p-6 border-secondary/30 hover:border-secondary transition-all">
+                    <div className="text-center">
+                      <Icon name="Megaphone" className="text-secondary mx-auto mb-4" size={48} />
+                      <h5 className="text-lg font-semibold mb-2">Набор новобранцев!</h5>
+                      <p className="text-sm text-muted-foreground">Присоединяйся к нашему флоту. Бонусы для новичков!</p>
+                    </div>
+                  </Card>
+
+                  <Card className="glass-card p-6 border-accent/30 hover:border-accent transition-all">
+                    <div className="text-center">
+                      <Icon name="Trophy" className="text-accent mx-auto mb-4" size={48} />
+                      <h5 className="text-lg font-semibold mb-2">Турнир флотов</h5>
+                      <p className="text-sm text-muted-foreground">Еженедельные PvP турниры с призами!</p>
+                    </div>
+                  </Card>
+
+                  <Card className="glass-card p-6 border-primary/30 hover:border-primary transition-all">
+                    <div className="text-center">
+                      <Icon name="Sparkles" className="text-primary mx-auto mb-4" size={48} />
+                      <h5 className="text-lg font-semibold mb-2">Новые моды</h5>
+                      <p className="text-sm text-muted-foreground">Уникальные корабли и оружие уже доступны!</p>
+                    </div>
+                  </Card>
+                </div>
               </div>
             </Card>
           </div>
